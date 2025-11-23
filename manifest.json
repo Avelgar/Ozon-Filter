@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Ozon Smart Filter",
+  "version": "3.0",
+  "description": "Фильтр товаров по словам и картинкам",
+  "permissions": ["storage", "contextMenus"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.ozon.ru/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
