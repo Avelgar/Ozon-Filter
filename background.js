@@ -1,17 +1,24 @@
 chrome.runtime.onInstalled.addListener(() => {
+    // 1. Черный список (Скрыть)
     chrome.contextMenus.create({
         id: "blockOzonImage",
-        title: "⛔ Скрыть все товары с этой картинкой",
-        // Добавляем "link", чтобы срабатывало на карточках-ссылках
-        contexts: ["image", "link"] 
+        title: "⛔ Скрыть товары с этой картинкой",
+        contexts: ["all"] 
+    });
+    
+    // 2. Белый список (Оставить только)
+    chrome.contextMenus.create({
+        id: "whitelistOzonImage",
+        title: "✅ Оставить ТОЛЬКО товары с этой картинкой",
+        contexts: ["all"] 
     });
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
+    // Отправляем разные команды в зависимости от выбранного пункта
     if (info.menuItemId === "blockOzonImage") {
-        // Мы просто шлем команду, а контент-скрипт сам разберется, какой URL брать
-        chrome.tabs.sendMessage(tab.id, {
-            action: "blockLastClicked"
-        });
+        chrome.tabs.sendMessage(tab.id, { action: "blockLastClicked" });
+    } else if (info.menuItemId === "whitelistOzonImage") {
+        chrome.tabs.sendMessage(tab.id, { action: "whitelistLastClicked" });
     }
 });

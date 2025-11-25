@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Ozon Smart Filter",
-  "version": "3.0",
-  "description": "Фильтр товаров по словам и картинкам",
+  "name": "Ozon Ultra Filter",
+  "version": "4.0",
+  "description": "Фильтр товаров Ozon: слова, картинки, коллажи",
   "permissions": ["storage", "contextMenus"],
   "action": {
     "default_popup": "popup.html",

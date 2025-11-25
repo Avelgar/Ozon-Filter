@@ -3,10 +3,12 @@
 <head>
   <meta charset="utf-8">
   <style>
-    body { width: 320px; padding: 15px; font-family: sans-serif; }
-    label { font-weight: bold; display: block; margin-top: 10px; font-size: 14px;}
-    textarea { width: 100%; height: 60px; margin-bottom: 5px; resize: vertical; border: 1px solid #ccc; border-radius: 4px; padding: 5px; box-sizing: border-box;}
-    button { width: 100%; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+    body { width: 320px; padding: 15px; font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 14px; }
+    h3 { margin-top: 0; margin-bottom: 15px; color: #005bff; }
+    label { font-weight: bold; display: block; margin-top: 10px; font-size: 13px;}
+    textarea { width: 100%; height: 60px; margin-bottom: 5px; resize: vertical; border: 1px solid #ccc; border-radius: 6px; padding: 8px; box-sizing: border-box; font-family: inherit;}
+    
+    button { width: 100%; padding: 10px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; transition: 0.2s; }
     
     .btn-primary { background-color: #005bff; color: white; }
     .btn-primary:hover { background-color: #0040b0; }
@@ -14,16 +16,21 @@
     .btn-secondary { background-color: #f5f7fa; color: #333; border: 1px solid #ccc; }
     .btn-secondary:hover { background-color: #e0e0e0; }
     
-    .btn-danger { background-color: #ffebee; color: #c62828; border: 1px solid #ffcdd2; margin-top: 5px;}
-    .btn-danger:hover { background-color: #ffcdd2; }
+    /* Стили для кнопок сброса (маленькие красные) */
+    .btn-danger { background-color: #fff0f5; color: #d93025; border: 1px solid #ffcdd2; margin: 0; font-size: 12px; padding: 4px 8px; width: auto;}
+    .btn-danger:hover { background-color: #ffebee; }
 
     .note { font-size: 11px; color: #666; margin-bottom: 5px; }
-    .status { color: green; font-size: 12px; text-align: center; height: 15px; margin-top: 5px;}
+    .status { color: #2e7d32; font-size: 12px; text-align: center; height: 15px; margin-top: 5px; font-weight: 600;}
+    
+    /* Блок статистики */
     .img-stats { margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; font-size: 13px;}
+    .stat-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .count { font-weight: bold; margin-left: 3px; }
   </style>
 </head>
 <body>
-  <h3>Настройки фильтра</h3>
+  <h3>Ozon Ultra Filter</h3>
   
   <label>✅ Обязательные слова:</label>
   <textarea id="include" placeholder="Например: 8gb"></textarea>
@@ -32,11 +39,18 @@
   <textarea id="exclude" placeholder="Например: чехол"></textarea>
 
   <div id="status" class="status"></div>
-  <button id="saveBtn" class="btn-primary">Сохранить</button>
+  <button id="saveBtn" class="btn-primary">Применить текст</button>
 
   <div class="img-stats">
-    Заблокировано картинок: <b id="imgCount">0</b>
-    <button id="clearImagesBtn" class="btn-danger">Очистить список картинок</button>
+    <div class="stat-row">
+        <span>⛔ Скрыто картинок: <span id="blockCount" class="count">0</span></span>
+        <button id="clearBlockBtn" class="btn-danger">Сброс</button>
+    </div>
+    
+    <div class="stat-row">
+        <span>✅ Белый список: <span id="whiteCount" class="count">0</span></span>
+        <button id="clearWhiteBtn" class="btn-danger">Сброс</button>
+    </div>
   </div>
   
   <button id="resetBtn" class="btn-secondary">Сбросить всё</button>
